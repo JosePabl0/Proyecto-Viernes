@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Tienda | InkSticker</title>
+
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+        <link rel="stylesheet" th:href="@{/css/tienda.css}">
+    </head>
+
+    <body>
+
+        <!-- ENCABEZADO PRINCIPAL -->
+        <header class="site-header" id="inicio">
+
+            <div class="topbar">
+                <div class="container topbar-content">
+                    <a href="tel:+50684743842">☎ +506 8474 3842</a>
+
+                    <div class="social-links">
+                        <a href="#" aria-label="X">X</a>
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Pinterest">P</a>
+                        <a href="#" aria-label="Instagram">◎</a>
+                        <a href="#" aria-label="YouTube">▶</a>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="main-nav">
+                <div class="container nav-content">
+
+                    <a class="brand" th:href="@{/}">
+                        <span class="brand-symbol">I</span>
+                        <span>Ink<span class="brand-highlight">Sticker</span></span>
+                    </a>
+
+                    <div class="nav-links">
+                        <a th:href="@{/}">Inicio</a>
+                        <a th:href="@{/tienda}">Tienda</a>
+                        <a th:href="@{/upload}">Upload</a>
+                        <a th:href="@{/#nosotros}">Conozcámonos</a>
+                        <a th:href="@{/carrito}">Carrito</a>
+                        <a th:href="@{/cuenta}">Cuenta</a>
+                        <a th:href="@{/#consultas}">Consultas</a>
+                        <a th:href="@{/}" title="Traducción próximamente">English</a>
+
+                        <a class="button button-gold nav-cta"
+                           href="https://wa.me/50684743842"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Cotizar por WhatsApp
+                        </a>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+
+
+        <main>
+
+            <!-- VISTA PRINCIPAL: CATEGORÍAS -->
+            <div th:if="${categoriaSeleccionada == null}">
+
+                <section class="category-heading container">
+
+                    <span class="eyebrow">INKSTICKER STORE</span>
+
+                    <h1>TIENDA</h1>
+
+                    <h2>Explora algunos de nuestros productos más vendidos</h2>
+
+                    <p>
+                        Encuentra una selección de productos, herramientas y
+                        accesorios pensados para acompañar tu creatividad.
+                        Explora nuestras categorías y descubre todo lo que
+                        tenemos disponible para ti.
+                    </p>
+
+                </section>
+
+
+                <!-- CATEGORÍAS DINÁMICAS -->
+                <section class="category-section container">
+
+                    <div class="category-grid">
+
+                        <article class="category-card"
+                                 th:each="cat : ${categorias}">
+
+                            <img class="category-image"
+                                 th:src="${cat.imagen != null
+                                 and !#strings.isEmpty(cat.imagen)
+                                 ? cat.imagen
+                                 : 'https://placehold.co/800x600/252525/d7ad43?text=InkSticker'}"
+                                 th:alt="${cat.nombre}">
+
+                            <div class="category-overlay"></div>
+
+                            <a class="category-button"
+                               th:href="@{/tienda(categoria=${cat.id})}"
+                               th:text="${cat.nombre}">
+                                Ver categoría
+                            </a>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SERVICIOS Y BENEFICIOS -->
+                <section class="store-benefits container">
+
+                    <article class="benefit-card">
+                        <div class="benefit-icon">✓</div>
+                        <h3>Compra fácil y seguro</h3>
+                        <p>
+                            Explora nuestros productos y realiza tus consultas
+                            de manera sencilla.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="benefit-icon">✆</div>
+                        <h3>¿Necesitas ayuda?</h3>
+                        <p>
+                            Estamos disponibles para orientarte y ayudarte
+                            a encontrar lo que necesitas.
+                        </p>
+                    </article>
+
+                    <article class="benefit-card">
+                        <div class="benefit-icon">◇</div>
+                        <h3>Garantías fáciles</h3>
+                        <p>
+                            Queremos ofrecerte una experiencia de compra
+                            clara y satisfactoria.
+                        </p>
+                    </article>
+
+                </section>
+
+            </div>
+
+
+            <!-- VISTA DE PRODUCTOS DE UNA CATEGORÍA -->
+            <div th:if="${categoriaSeleccionada != null}">
+
+                <section class="category-products-heading container">
+
+                    <a class="back-to-categories" th:href="@{/tienda}">
+                        ← Volver a categorías
+                    </a>
+
+                    <span class="eyebrow">INKSTICKER STORE</span>
+
+                    <h1 th:text="${categoriaSeleccionada.nombre}">
+                        Categoría
+                    </h1>
+
+                    <p th:text="${categoriaSeleccionada.descripcion != null
+                       ? categoriaSeleccionada.descripcion
+                       : 'Explora nuestros productos disponibles.'}">
+                        Descripción de la categoría.
+                    </p>
+
+                </section>
+
+
+                <!-- PRODUCTOS -->
+                <section class="container category-products">
+
+                    <div class="product-grid"
+                         th:if="${productos != null and !productos.isEmpty()}">
+
+                        <article class="product-card"
+                                 th:each="producto : ${productos.content}">
+
+                            <a th:href="@{/producto/{id}(id=${producto.id})}">
+                                <img class="product-image"
+                                     th:src="${producto.imagen != null
+                                     and !#strings.isEmpty(producto.imagen)
+                                     ? producto.imagen
+                                     : 'https://placehold.co/600x500/252525/d7ad43?text=InkSticker'}"
+                                     th:alt="${producto.nombre}">
+                            </a>
+
+                            <div class="product-info">
+
+                                <span class="product-tag"
+                                      th:if="${producto.etiqueta != null
+                                      and !#strings.isEmpty(producto.etiqueta)}"
+                                      th:text="${producto.etiqueta}">
+                                    Nuevo
+                                </span>
+
+                                <h3 th:text="${producto.nombre}">
+                                    Producto
+                                </h3>
+
+                                <p th:text="${producto.descripcion != null
+                                   ? producto.descripcion
+                                   : 'Descubre este producto.'}">
+                                    Descripción del producto.
+                                </p>
+
+                                <div class="product-card-bottom">
+
+                                    <span class="product-price"
+                                          th:text="${'₡' + #numbers.formatDecimal(
+                                          producto.precio, 1, 'POINT', 2, 'POINT')}">
+                                        ₡0.00
+                                    </span>
+
+                                    <a class="button button-gold"
+                                       th:href="@{/producto/{id}(id=${producto.id})}">
+                                        Ver producto
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+
+                    <!-- ESTADO CUANDO NO HAY PRODUCTOS -->
+                    <div class="empty-products"
+                         th:if="${productos == null or productos.isEmpty()}">
+
+                        <h2>Próximamente</h2>
+
+                        <p>
+                            Todavía no hay productos disponibles en esta categoría.
+                            Estamos preparando nuevas opciones para ti.
+                        </p>
+
+                        <a th:href="@{/tienda}" class="button button-gold">
+                            Ver todas las categorías
+                        </a>
+
+                    </div>
+
+
+                    <!-- PAGINACIÓN -->
+                    <nav class="store-pagination"
+                         th:if="${productos != null and productos.totalPages > 1}">
+
+                        <a th:if="${!productos.first}"
+                           th:href="@{/tienda(pagina=${productos.number - 1},
+                           categoria=${categoria})}">
+                            ← Anterior
+                        </a>
+
+                        <span th:each="numero : ${#numbers.sequence(
+                              0, productos.totalPages - 1)}">
+
+                            <a th:href="@{/tienda(pagina=${numero},
+                               categoria=${categoria})}"
+                               th:text="${numero + 1}"
+                               th:classappend="${numero == productos.number
+                               ? ' current-page' : ''}">
+                                1
+                            </a>
+
+                        </span>
+
+                        <a th:if="${!productos.last}"
+                           th:href="@{/tienda(pagina=${productos.number + 1},
+                           categoria=${categoria})}">
+                            Siguiente →
+                        </a>
+
+                    </nav>
+
+                </section>
+
+            </div>
+
+        </main>
+
+
+        <!-- PIE DE PÁGINA -->
+        <footer class="site-footer">
+
+            <div class="container footer-main">
+
+                <a class="brand footer-brand" th:href="@{/}">
+                    <span class="brand-symbol">I</span>
+                    <span>Ink<span class="brand-highlight">Sticker</span></span>
+                </a>
+
+                <p>Creatividad, ideas y diseños personalizados.</p>
+
+                <div class="footer-links">
+                    <a th:href="@{/}">Inicio</a>
+                    <a th:href="@{/tienda}">Tienda</a>
+                    <a th:href="@{/#nosotros}">Nosotros</a>
+                    <a th:href="@{/#ubicacion}">Ubicación</a>
+                    <a th:href="@{/}" title="Traducción próximamente">English</a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>
+                        © 2026 InkSticker.
+                        <span> | </span>
+                        Contenido de demostración sujeto a actualización.
+                    </p>
+                </div>
+            </div>
+
+        </footer>
+
+
+        <!-- WHATSAPP -->
+        <a class="whatsapp-float"
+           href="https://wa.me/50684743842"
+           target="_blank"
+           rel="noopener noreferrer">
+            <span>◉</span>
+        </a>
+
+    </body>
+</html>

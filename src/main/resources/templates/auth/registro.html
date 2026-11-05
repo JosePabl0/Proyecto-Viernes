@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Crear cuenta | InkSticker</title>
+
+    <!-- CSS COMPARTIDO DE CUENTA -->
+    <link rel="stylesheet" th:href="@{/css/Cuenta.css}">
+</head>
+
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+
+    <main class="auth-container">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            Ink<span>Sticker</span>
+        </div>
+
+        <!-- TITULO -->
+
+        <h1>Crea tu cuenta</h1>
+
+        <p class="subtitle">
+            Únete a InkSticker y comienza a personalizar.
+        </p>
+
+        <!-- MENSAJE DE ERROR DE REGISTRO -->
+
+        <div class="message error"
+             th:if="${errorRegistro}"
+             th:text="${errorRegistro}">
+        </div>
+
+        <!-- MENSAJE DE VALIDACION -->
+
+        <div class="message error"
+             th:if="${#fields.hasErrors('registroForm')}"
+             th:text="'Revisa los datos ingresados e inténtalo nuevamente.'">
+        </div>
+
+        <!-- FORMULARIO DE REGISTRO -->
+
+        <form th:action="@{/registro}"
+              th:object="${registroForm}"
+              method="post">
+
+            <!-- NOMBRE COMPLETO -->
+
+            <div class="form-group">
+
+                <label for="nombre">
+                    Nombre completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    th:field="*{nombre}"
+                    placeholder="Tu nombre"
+                    autocomplete="name"
+                    maxlength="100"
+                    required>
+
+                <small th:if="${#fields.hasErrors('nombre')}"
+                       th:errors="*{nombre}"></small>
+
+            </div>
+
+            <!-- CORREO ELECTRONICO -->
+
+            <div class="form-group">
+
+                <label for="correo">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="correo"
+                    th:field="*{correo}"
+                    placeholder="tucorreo@ejemplo.com"
+                    autocomplete="email"
+                    maxlength="150"
+                    required>
+
+                <small th:if="${#fields.hasErrors('correo')}"
+                       th:errors="*{correo}"></small>
+
+            </div>
+
+            <!-- CONTRASEÑA -->
+
+            <div class="form-group">
+
+                <label for="contrasena">
+                    Contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="contrasena"
+                    th:field="*{contrasena}"
+                    placeholder="Mínimo 8 caracteres"
+                    autocomplete="new-password"
+                    minlength="8"
+                    maxlength="72"
+                    required>
+
+                <small th:if="${#fields.hasErrors('contrasena')}"
+                       th:errors="*{contrasena}"></small>
+
+            </div>
+
+            <!-- BOTON REGISTRO -->
+
+            <button type="submit">
+                Crear cuenta
+            </button>
+
+        </form>
+
+        <!-- ENLACE A LOGIN -->
+
+        <div class="links">
+
+            ¿Ya tienes una cuenta?
+
+            <a th:href="@{/login}">
+                Iniciar sesión
+            </a>
+
+        </div>
+
+        <!-- VOLVER AL INICIO -->
+
+        <a class="back" th:href="@{/}">
+            ← Volver al inicio
+        </a>
+
+    </main>
+
+</body>
+</html>

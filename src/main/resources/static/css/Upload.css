@@ -1,0 +1,606 @@
+/* =========================================
+   INKSTICKER - UPLOAD
+   ========================================= */
+:root {
+    --upload-bg: #f5f3ef;
+    --upload-card: #1b1b1b;
+    --upload-card-secondary: #222222;
+    --upload-border: #353535;
+    --upload-gold: var(--gold, #d4a843);
+    --upload-text: #f5f5f5;
+    --upload-muted: #b5b5b5;
+    --upload-radius: var(--radius, 16px);
+}
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.upload-hero {
+    position: relative;
+    min-height: 390px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background:
+        linear-gradient(
+        100deg,
+        rgba(17, 17, 17, 0.94),
+        rgba(17, 17, 17, 0.65)
+        ),
+        url("https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1800&q=85")
+        center/cover no-repeat;
+}
+
+.upload-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+        circle at 80% 50%,
+        rgba(212, 168, 67, 0.10),
+        transparent 50%
+        );
+}
+
+.upload-hero-content {
+    position: relative;
+    z-index: 1;
+    padding-top: 65px;
+    padding-bottom: 65px;
+}
+
+.upload-hero h1 {
+    margin: 22px 0;
+    color: #ffffff;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    line-height: 1.08;
+    font-weight: 700;
+}
+
+.upload-hero h1 span {
+    color: var(--upload-gold);
+}
+
+.upload-hero p {
+    max-width: 600px;
+    color: #d1d1d1;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* =========================================
+   ENCABEZADOS
+   ========================================= */
+
+.upload-section {
+    padding: 90px 0;
+    background: var(--upload-bg);
+}
+
+.upload-heading {
+    max-width: 750px;
+    margin: 0 auto 45px;
+    text-align: center;
+}
+
+.upload-heading h2 {
+    margin: 16px 0;
+    color: #1b1b1b;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+}
+
+.upload-heading h2 span {
+    color: var(--upload-gold);
+}
+
+.upload-heading p {
+    color: #666666;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+/* =========================================
+   TARJETA DEL FORMULARIO
+   ========================================= */
+
+.upload-card {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 48px;
+    background: var(--upload-card);
+    border: 1px solid var(--upload-border);
+    border-radius: var(--upload-radius);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.12);
+}
+
+.form-section {
+    padding-bottom: 38px;
+    margin-bottom: 38px;
+    border-bottom: 1px solid var(--upload-border);
+}
+
+.form-section:last-of-type {
+    margin-bottom: 25px;
+}
+
+.form-section-heading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.section-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    color: var(--upload-gold);
+    background: rgba(212, 168, 67, 0.10);
+    border: 1px solid rgba(212, 168, 67, 0.35);
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.form-section-heading h3 {
+    margin: 0 0 6px;
+    color: var(--upload-text);
+    font-size: 1.25rem;
+}
+
+.form-section-heading p {
+    margin: 0;
+    color: var(--upload-muted);
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   GRID Y CAMPOS
+   ========================================= */
+
+.upload-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.upload-form-group {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.upload-form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.upload-form-group label {
+    margin-bottom: 10px;
+    color: #eeeeee;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.upload-form-group input,
+.upload-form-group select,
+.upload-form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    color: #ffffff;
+    background: var(--upload-card-secondary);
+    border: 1px solid #404040;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.upload-form-group input,
+.upload-form-group select {
+    min-height: 50px;
+}
+
+.upload-form-group textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+.upload-form-group input::placeholder,
+.upload-form-group textarea::placeholder {
+    color: #858585;
+}
+
+.upload-form-group select {
+    color: #eaeaea;
+    cursor: pointer;
+}
+
+.upload-form-group select option {
+    color: #ffffff;
+    background: #222222;
+}
+
+.upload-form-group input:focus,
+.upload-form-group select:focus,
+.upload-form-group textarea:focus {
+    border-color: var(--upload-gold);
+    box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.12);
+}
+
+/* =========================================
+   ZONA DE CARGA DE ARCHIVOS
+   ========================================= */
+
+.upload-dropzone {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 245px;
+    padding: 35px 25px;
+    text-align: center;
+    background: #202020;
+    border: 2px dashed #484848;
+    border-radius: 12px;
+    cursor: pointer;
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        transform 0.25s ease;
+}
+
+.upload-dropzone:hover {
+    background: #26231c;
+    border-color: var(--upload-gold);
+}
+
+.upload-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    color: var(--upload-gold);
+}
+
+.upload-dropzone strong {
+    margin-bottom: 10px;
+    color: #ffffff;
+    font-size: 1.05rem;
+}
+
+.dropzone-description {
+    color: #bdbdbd;
+    font-size: 0.88rem;
+    line-height: 1.7;
+}
+
+.dropzone-action {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 22px;
+    color: var(--upload-gold);
+    border: 1px solid rgba(212, 168, 67, 0.55);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.upload-dropzone:hover .dropzone-action {
+    color: #171717;
+    background: var(--upload-gold);
+}
+
+.dropzone-limit {
+    margin-top: 13px;
+    color: #888888;
+    font-size: 0.78rem;
+}
+
+.upload-dropzone input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+}
+
+/* =========================================
+   ARCHIVOS SELECCIONADOS
+   ========================================= */
+
+.upload-file-list {
+    margin-top: 18px;
+}
+
+.file-list-title {
+    margin-bottom: 10px;
+    color: #eeeeee;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.upload-file-item {
+    margin-bottom: 8px;
+    padding: 10px 14px;
+    color: #d7d7d7;
+    background: #242424;
+    border: 1px solid #383838;
+    border-radius: 7px;
+    font-size: 0.85rem;
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   ACEPTACIÓN
+   ========================================= */
+
+.upload-terms {
+    margin: 28px 0;
+}
+
+.upload-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: #bdbdbd;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    cursor: pointer;
+}
+
+.upload-checkbox input {
+    flex-shrink: 0;
+    width: 17px;
+    height: 17px;
+    margin-top: 3px;
+    accent-color: var(--upload-gold);
+    cursor: pointer;
+}
+
+/* =========================================
+   BOTÓN DE ENVÍO
+   ========================================= */
+
+.upload-submit {
+    text-align: center;
+    padding-top: 15px;
+}
+
+.upload-submit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    min-width: 260px;
+    padding: 16px 32px;
+    color: #171717;
+    background: var(--upload-gold);
+    border: none;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.upload-submit-button:hover {
+    background: #e3bd68;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(212, 168, 67, 0.25);
+}
+
+.upload-submit-button span {
+    font-size: 1.2rem;
+}
+
+.upload-submit p {
+    margin-top: 18px;
+    color: #999999;
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+/* =========================================
+   BENEFICIOS
+   ========================================= */
+
+.upload-benefits {
+    padding: 75px 0;
+    background: #ffffff;
+}
+
+.upload-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+}
+
+.upload-benefit {
+    padding: 35px 28px;
+    text-align: center;
+    background: #1b1b1b;
+    border: 1px solid #353535;
+    border-radius: var(--upload-radius);
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.upload-benefit:hover {
+    transform: translateY(-5px);
+    border-color: var(--upload-gold);
+}
+
+.benefit-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 20px;
+    color: var(--upload-gold);
+    background: rgba(212, 168, 67, 0.10);
+    border: 1px solid rgba(212, 168, 67, 0.25);
+    border-radius: 50%;
+    font-size: 1.5rem;
+}
+
+.upload-benefit h3 {
+    margin-bottom: 12px;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.upload-benefit p {
+    margin: 0;
+    color: #b5b5b5;
+    font-size: 0.88rem;
+    line-height: 1.8;
+}
+
+/* =========================================
+   GALERÍA INSPIRACIONAL
+   ========================================= */
+
+.upload-inspiration {
+    padding: 85px 0;
+    background: var(--upload-bg);
+}
+
+.upload-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.upload-gallery-item {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+    border-radius: var(--upload-radius);
+    background: #dddddd;
+}
+
+.upload-gallery-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.upload-gallery-item:hover img {
+    transform: scale(1.06);
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    .upload-card {
+        padding: 35px;
+    }
+
+    .upload-benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .upload-benefit {
+        padding: 30px;
+    }
+
+    .upload-gallery-item {
+        height: 260px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .upload-hero {
+        min-height: 330px;
+    }
+
+    .upload-hero-content {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    .upload-section,
+    .upload-inspiration {
+        padding: 60px 0;
+    }
+
+    .upload-heading {
+        margin-bottom: 30px;
+    }
+
+    .upload-card {
+        padding: 25px 20px;
+        border-radius: 12px;
+    }
+
+    .form-section {
+        padding-bottom: 28px;
+        margin-bottom: 28px;
+    }
+
+    .form-section-heading {
+        gap: 12px;
+    }
+
+    .section-number {
+        width: 38px;
+        height: 38px;
+        font-size: 0.8rem;
+    }
+
+    .form-section-heading h3 {
+        font-size: 1.05rem;
+    }
+
+    .upload-form-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .upload-form-group.full-width {
+        grid-column: auto;
+    }
+
+    .upload-dropzone {
+        min-height: 220px;
+        padding: 25px 15px;
+    }
+
+    .upload-submit-button {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .upload-gallery {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .upload-gallery-item {
+        height: 280px;
+    }
+}

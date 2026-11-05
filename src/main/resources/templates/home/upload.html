@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>InkSticker | Upload tu diseño</title>
+
+        <meta name="description"
+              content="Comparte tu diseño personalizado con InkSticker.">
+
+        <link rel="stylesheet" th:href="@{/css/home.css}">
+        <link rel="stylesheet" th:href="@{/css/Upload.css}">
+    </head>
+
+    <body>
+
+        <!-- CABECERA -->
+        <header class="site-header" id="inicio">
+
+            <div class="topbar">
+                <div class="container topbar-content">
+                    <a href="tel:+50684743842">☎ +506 8474 3842</a>
+                </div>
+            </div>
+
+            <nav class="main-nav" aria-label="Navegación principal">
+                <div class="container nav-content">
+
+                    <a class="brand" th:href="@{/}"
+                       aria-label="InkSticker, volver al inicio">
+                        <span class="brand-symbol">I</span>
+                        <span>Ink<span class="brand-highlight">Sticker</span></span>
+                    </a>
+
+                    <div class="nav-links">
+                        <a th:href="@{/}">Inicio</a>
+                        <a th:href="@{/tienda}">Tienda</a>
+                        <a th:href="@{/upload}" class="active">Upload</a>
+                        <a th:href="@{/carrito}">Carrito</a>
+                        <a th:href="@{/cuenta}">Cuenta</a>
+
+                        <a class="button button-gold nav-cta"
+                           href="https://wa.me/50684743842"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Cotizar por WhatsApp
+                        </a>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+
+        <main>
+
+            <!-- BANNER -->
+            <section class="upload-hero">
+                <div class="upload-hero-overlay"></div>
+
+                <div class="container upload-hero-content">
+                    <span class="eyebrow">TU CREATIVIDAD, NUESTRA INSPIRACIÓN</span>
+
+                    <h1>
+                        Haz realidad<br>
+                        <span>tu propio diseño.</span>
+                    </h1>
+
+                    <p>
+                        Comparte tu idea con nosotros y transformemos
+                        tu creatividad en algo único.
+                    </p>
+                </div>
+            </section>
+
+            <!-- FORMULARIO -->
+            <section class="upload-section">
+                <div class="container">
+
+                    <div class="upload-heading">
+                        <span class="eyebrow eyebrow-dark">PERSONALIZA TU EXPERIENCIA</span>
+
+                        <h2>Cuéntanos sobre <span>tu proyecto</span></h2>
+
+                        <p>
+                            Completa el formulario y adjunta los archivos
+                            que deseas utilizar para tu diseño.
+                        </p>
+                    </div>
+
+                    <div class="upload-card">
+
+                        <form th:action="@{/upload}"
+                              method="post"
+                              enctype="multipart/form-data">
+
+                            <!-- INFORMACIÓN PERSONAL -->
+                            <div class="form-section">
+                                <div class="form-section-heading">
+                                    <span class="section-number">01</span>
+                                    <div>
+                                        <h3>Información personal</h3>
+                                        <p>Queremos saber cómo contactarte.</p>
+                                    </div>
+                                </div>
+
+                                <div class="upload-form-grid">
+
+                                    <div class="upload-form-group">
+                                        <label for="nombre">Nombre completo *</label>
+                                        <input type="text"
+                                               id="nombre"
+                                               name="nombre"
+                                               placeholder="Escribe tu nombre completo"
+                                               maxlength="100"
+                                               autocomplete="name"
+                                               required>
+                                    </div>
+
+                                    <div class="upload-form-group">
+                                        <label for="telefono">Teléfono *</label>
+                                        <input type="tel"
+                                               id="telefono"
+                                               name="telefono"
+                                               placeholder="+506 0000-0000"
+                                               maxlength="20"
+                                               autocomplete="tel"
+                                               required>
+                                    </div>
+
+                                    <div class="upload-form-group full-width">
+                                        <label for="correo">Correo electrónico *</label>
+                                        <input type="email"
+                                               id="correo"
+                                               name="correo"
+                                               placeholder="tucorreo@ejemplo.com"
+                                               maxlength="150"
+                                               autocomplete="email"
+                                               required>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- INFORMACIÓN DEL DISEÑO -->
+                            <div class="form-section">
+                                <div class="form-section-heading">
+                                    <span class="section-number">02</span>
+                                    <div>
+                                        <h3>Detalles de tu diseño</h3>
+                                        <p>Cuéntanos qué tienes en mente.</p>
+                                    </div>
+                                </div>
+
+                                <div class="upload-form-grid">
+
+                                    <div class="upload-form-group full-width">
+                                        <label for="servicio">Tipo de servicio *</label>
+
+                                        <select id="servicio"
+                                                name="servicio"
+                                                required>
+
+                                            <option value="" disabled selected>
+                                                Selecciona una opción
+                                            </option>
+
+                                            <option value="Tatuaje temporal personalizado">
+                                                Tatuaje temporal personalizado
+                                            </option>
+
+                                            <option value="Sticker personalizado">
+                                                Sticker personalizado
+                                            </option>
+
+                                            <option value="Ambos">
+                                                Tatuajes y stickers
+                                            </option>
+
+                                            <option value="Otro">
+                                                Otro diseño
+                                            </option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="upload-form-group">
+                                        <label for="cantidad">Cantidad aproximada</label>
+
+                                        <input type="number"
+                                               id="cantidad"
+                                               name="cantidad"
+                                               min="1"
+                                               max="10000"
+                                               placeholder="Ej. 10">
+                                    </div>
+
+                                    <div class="upload-form-group">
+                                        <label for="tamano">Tamaño aproximado</label>
+
+                                        <select id="tamano" name="tamano">
+
+                                            <option value="" selected>
+                                                Selecciona el tamaño
+                                            </option>
+
+                                            <option value="Pequeño">
+                                                Pequeño
+                                            </option>
+
+                                            <option value="Mediano">
+                                                Mediano
+                                            </option>
+
+                                            <option value="Grande">
+                                                Grande
+                                            </option>
+
+                                            <option value="Personalizado">
+                                                Personalizado
+                                            </option>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="upload-form-group full-width">
+                                        <label for="descripcion">
+                                            Descripción de tu idea *
+                                        </label>
+
+                                        <textarea id="descripcion"
+                                                  name="descripcion"
+                                                  rows="5"
+                                                  maxlength="1500"
+                                                  placeholder="Cuéntanos cómo imaginas tu diseño, colores, detalles y cualquier información importante..."
+                                                  required></textarea>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- CARGA DE ARCHIVOS -->
+                            <div class="form-section">
+                                <div class="form-section-heading">
+                                    <span class="section-number">03</span>
+                                    <div>
+                                        <h3>Comparte tu creatividad</h3>
+                                        <p>Adjunta imágenes o archivos de referencia.</p>
+                                    </div>
+                                </div>
+
+                                <label for="archivos" class="upload-dropzone">
+
+                                    <span class="upload-icon" aria-hidden="true">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                             width="48"
+                                             height="48"
+                                             viewBox="0 0 24 24"
+                                             fill="none"
+                                             stroke="currentColor"
+                                             stroke-width="1.5"
+                                             stroke-linecap="round"
+                                             stroke-linejoin="round">
+
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+
+                                        <polyline points="17 8 12 3 7 8"/>
+
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+
+                                        </svg>
+                                    </span>
+
+                                    <strong>Upload Portfolio Files</strong>
+
+                                    <span class="dropzone-description">
+                                        Upload images of your best work
+                                        (JPG, PNG or PDF)
+                                    </span>
+
+                                    <span class="dropzone-action">
+                                        Seleccionar archivos
+                                    </span>
+
+                                    <span class="dropzone-limit">
+                                        Puedes seleccionar varios archivos.
+                                    </span>
+
+                                    <input type="file"
+                                           id="archivos"
+                                           name="archivos"
+                                           accept=".jpg,.jpeg,.png,.pdf"
+                                           multiple>
+
+                                </label>
+
+                                <div id="file-list" class="upload-file-list"
+                                     aria-live="polite"></div>
+
+                            </div>
+
+                            <!-- ACEPTACIÓN -->
+                            <div class="upload-terms">
+
+                                <label class="upload-checkbox">
+                                    <input type="checkbox"
+                                           name="acepta"
+                                           value="true"
+                                           required>
+
+                                    <span>
+                                        Confirmo que los archivos enviados
+                                        corresponden a mi solicitud y autorizo
+                                        su revisión para fines de cotización. *
+                                    </span>
+                                </label>
+
+                            </div>
+
+                            <!-- BOTÓN -->
+                            <div class="upload-submit">
+
+                                <button type="submit"
+                                        class="button button-gold upload-submit-button">
+                                    Enviar mi solicitud
+                                    <span aria-hidden="true">→</span>
+                                </button>
+
+                                <p>
+                                    Nos pondremos en contacto contigo
+                                    para conversar sobre tu diseño.
+                                </p>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- BENEFICIOS -->
+            <section class="upload-benefits">
+                <div class="container">
+
+                    <div class="upload-benefits-grid">
+
+                        <article class="upload-benefit">
+                            <div class="benefit-icon">✦</div>
+                            <h3>Envíanos tu archivo</h3>
+                            <p>
+                                Comparte tus diseños, referencias o ideas
+                                para que podamos conocer tu propuesta.
+                            </p>
+                        </article>
+
+                        <article class="upload-benefit">
+                            <div class="benefit-icon">◷</div>
+                            <h3>Servicio Express</h3>
+                            <p>
+                                Consulta con nuestro equipo la disponibilidad
+                                de opciones de entrega rápida.
+                            </p>
+                        </article>
+
+                        <article class="upload-benefit">
+                            <div class="benefit-icon">◇</div>
+                            <h3>Formas de pago</h3>
+                            <p>
+                                Te brindaremos información sobre las opciones
+                                de pago disponibles para tu pedido.
+                            </p>
+                        </article>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- INSPIRACIÓN -->
+            <section class="upload-inspiration">
+                <div class="container">
+
+                    <div class="upload-heading">
+                        <span class="eyebrow eyebrow-dark">INSPÍRATE</span>
+                        <h2>Ideas que se convierten <span>en arte</span></h2>
+                        <p>
+                            Cada gran diseño comienza con una idea.
+                            ¿Cuál es la tuya?
+                        </p>
+                    </div>
+
+                    <div class="upload-gallery">
+
+                        <div class="upload-gallery-item">
+                            <img src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?auto=format&fit=crop&w=700&q=80"
+                                 alt="Inspiración de tatuajes temporales"
+                                 loading="lazy">
+                        </div>
+
+                        <div class="upload-gallery-item">
+                            <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=700&q=80"
+                                 alt="Inspiración artística para diseños"
+                                 loading="lazy">
+                        </div>
+
+                        <div class="upload-gallery-item">
+                            <img src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=700&q=80"
+                                 alt="Ilustraciones creativas"
+                                 loading="lazy">
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <div class="container footer-main">
+
+                <a class="brand footer-brand"
+                   th:href="@{/}"
+                   aria-label="InkSticker, volver al inicio">
+
+                    <span class="brand-symbol">I</span>
+                    <span>Ink<span class="brand-highlight">Sticker</span></span>
+
+                </a>
+
+                <p>Creatividad, ideas y diseños personalizados.</p>
+
+                <div class="footer-links">
+                    <a th:href="@{/}">Inicio</a>
+                    <a th:href="@{/tienda}">Tienda</a>
+                    <a th:href="@{/upload}">Upload</a>
+                    <a th:href="@{/cuenta}">Cuenta</a>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>© 2026 InkSticker. Todos los derechos reservados.</p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- WHATSAPP -->
+        <a class="whatsapp-float"
+           href="https://wa.me/50684743842"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Contactar por WhatsApp"
+           title="Escríbenos por WhatsApp">
+            <span aria-hidden="true">◉</span>
+        </a>
+
+        <!-- MOSTRAR ARCHIVOS SELECCIONADOS -->
+        <script>
+            const inputArchivos = document.getElementById("archivos");
+            const listaArchivos = document.getElementById("file-list");
+
+            inputArchivos.addEventListener("change", function () {
+
+                listaArchivos.innerHTML = "";
+
+                if (this.files.length > 0) {
+
+                    const titulo = document.createElement("p");
+                    titulo.className = "file-list-title";
+                    titulo.textContent = "Archivos seleccionados:";
+                    listaArchivos.appendChild(titulo);
+
+                    Array.from(this.files).forEach(function (archivo) {
+
+                        const elemento = document.createElement("div");
+                        elemento.className = "upload-file-item";
+                        elemento.textContent = "✓ " + archivo.name;
+
+                        listaArchivos.appendChild(elemento);
+
+                    });
+                }
+            });
+        </script>
+
+    </body>
+</html>

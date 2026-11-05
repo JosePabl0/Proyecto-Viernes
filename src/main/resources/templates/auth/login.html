@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Iniciar sesión | InkSticker</title>
+
+    <!-- CSS COMPARTIDO DE CUENTA -->
+    <link rel="stylesheet" th:href="@{/css/Cuenta.css}">
+</head>
+
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+
+    <main class="auth-container">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            Ink<span>Sticker</span>
+        </div>
+
+        <!-- TITULO -->
+
+        <h1>¡Qué bueno verte!</h1>
+
+        <p class="subtitle">
+            Inicia sesión para acceder a tu cuenta.
+        </p>
+
+        <!-- MENSAJE DE REGISTRO EXITOSO -->
+
+        <div class="message success" th:if="${param.registrado}">
+            Tu cuenta fue creada correctamente. Ya puedes iniciar sesión.
+        </div>
+
+        <!-- MENSAJE DE ERROR -->
+
+        <div class="message error" th:if="${param.error}">
+            El correo o la contraseña son incorrectos. Inténtalo nuevamente.
+        </div>
+
+        <!-- MENSAJE DE CIERRE DE SESION -->
+
+        <div class="message success" th:if="${param.logout}">
+            Has cerrado sesión correctamente.
+        </div>
+
+        <!-- FORMULARIO DE LOGIN -->
+
+        <form th:action="@{/login}" method="post">
+
+            <!-- CORREO -->
+
+            <div class="form-group">
+
+                <label for="correo">
+                    Correo electrónico
+                </label>
+
+                <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    placeholder="tucorreo@ejemplo.com"
+                    autocomplete="email"
+                    required>
+
+            </div>
+
+            <!-- CONTRASEÑA -->
+
+            <div class="form-group">
+
+                <label for="contrasena">
+                    Contraseña
+                </label>
+
+                <input
+                    type="password"
+                    id="contrasena"
+                    name="contrasena"
+                    placeholder="Ingresa tu contraseña"
+                    autocomplete="current-password"
+                    required>
+
+            </div>
+
+            <!-- BOTON -->
+
+            <button type="submit">
+                Iniciar sesión
+            </button>
+
+        </form>
+
+        <!-- ENLACE A REGISTRO -->
+
+        <div class="links">
+
+            ¿Todavía no tienes una cuenta?
+
+            <a th:href="@{/registro}">
+                Crear cuenta
+            </a>
+
+        </div>
+
+        <!-- VOLVER -->
+
+        <a class="back" th:href="@{/}">
+            ← Volver al inicio
+        </a>
+
+    </main>
+
+</body>
+</html>

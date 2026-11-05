@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mi cuenta | InkSticker</title>
+
+    <!-- CSS EXTERNO -->
+    <link rel="stylesheet" th:href="@{/css/Cuenta.css}">
+</head>
+
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+
+    <main class="container">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+            Ink<span>Sticker</span>
+        </div>
+
+        <!-- TITULO -->
+
+        <h1>Bienvenido a tu espacio</h1>
+
+        <p class="description">
+            Accede a tu cuenta para disfrutar de InkSticker
+            o crea una nueva para comenzar.
+        </p>
+
+        <!-- OPCIONES -->
+
+        <div class="options">
+
+            <!-- INICIAR SESION -->
+
+            <section class="option">
+
+                <h2>Ya tengo una cuenta</h2>
+
+                <p>
+                    Inicia sesión para acceder a tu cuenta personal
+                    y disfrutar de nuestros productos.
+                </p>
+
+                <a class="button" th:href="@{/login}">
+                    Iniciar sesión
+                </a>
+
+            </section>
+
+            <!-- REGISTRO -->
+
+            <section class="option">
+
+                <h2>Soy nuevo en InkSticker</h2>
+
+                <p>
+                    Crea tu cuenta para comenzar a explorar
+                    y personalizar tus productos favoritos.
+                </p>
+
+                <a class="button secondary" th:href="@{/registro}">
+                    Crear cuenta
+                </a>
+
+            </section>
+
+        </div>
+
+        <!-- VOLVER AL INICIO -->
+
+        <a class="back" th:href="@{/}">
+            ← Volver a la página principal
+        </a>
+
+    </main>
+
+</body>
+</html>

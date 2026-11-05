@@ -1,0 +1,705 @@
+
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>InkSticker | Tatuajes y diseños personalizados</title>
+    <meta name="description"
+          content="Descubre tatuajes temporales y stickers personalizados en InkSticker.">
+
+    <meta name="theme-color" content="#171717">
+
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <script th:src="@{/js/home.js}" defer></script>
+</head>
+<body>
+
+    <!-- CABECERA -->
+    <header class="site-header" id="inicio">
+
+        <div class="topbar">
+            <div class="container topbar-content">
+                <a href="tel:+50684743842">☎ +506 8474 3842</a>
+
+                <div class="social-links" aria-label="Redes sociales">
+                    <a href="https://x.com/"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="X">X</a>
+                    <a href="https://facebook.com/"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="Facebook">f</a>
+                    <a href="https://pinterest.com/"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="Pinterest">P</a>
+                    <a href="https://instagram.com/"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="Instagram">◎</a>
+                    <a href="https://youtube.com/"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="YouTube">▶</a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav" aria-label="Navegación principal">
+            <div class="container nav-content">
+
+                <a class="brand" th:href="@{/}"
+                   aria-label="InkSticker, volver al inicio">
+                    <span class="brand-symbol">I</span>
+                    <span>Ink<span class="brand-highlight">Sticker</span></span>
+                </a>
+
+                <div class="nav-links">
+                    <a th:href="@{/}">Inicio</a>
+                    <a th:href="@{/tienda}">Tienda</a>
+                    <a th:href="@{/upload}">Upload</a>
+                    <a href="#nosotros">Conozcámonos</a>
+                    <a th:href="@{/carrito}">Carrito</a>
+                    <a th:href="@{/cuenta}">Cuenta</a>
+                    <a href="#consultas">Consultas</a>
+                    <a th:href="@{/}" title="Traducción próximamente">English</a>
+
+                    <a class="button button-gold nav-cta"
+                       href="https://wa.me/50684743842"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Cotizar por WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- 1. BANNER PRINCIPAL -->
+        <section class="hero dark-section"
+                 id="banner"
+                 aria-label="Banner principal de InkSticker">
+
+            <div class="hero-carousel">
+
+                <div class="hero-slide is-active"
+                     aria-hidden="false">
+                    <img
+                        src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1800&q=85"
+                        alt="Inspiración de arte corporal"
+                        fetchpriority="high">
+                </div>
+
+                <div class="hero-slide" aria-hidden="true">
+                    <img
+                        src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?auto=format&fit=crop&w=1800&q=85"
+                        alt="Inspiración de tatuajes artísticos"
+                        loading="lazy">
+                </div>
+
+                <div class="hero-slide" aria-hidden="true">
+                    <img
+                        src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=1800&q=85"
+                        alt="Creatividad y materiales artísticos"
+                        loading="lazy">
+                </div>
+
+                <div class="hero-slide" aria-hidden="true">
+                    <img
+                        src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=1800&q=85"
+                        alt="Ilustraciones y diseños creativos"
+                        loading="lazy">
+                </div>
+
+            </div>
+
+            <div class="hero-overlay" aria-hidden="true"></div>
+
+            <button class="hero-arrow hero-prev"
+                    type="button"
+                    aria-label="Mostrar imagen anterior">
+                &#10094;
+            </button>
+
+            <button class="hero-arrow hero-next"
+                    type="button"
+                    aria-label="Mostrar imagen siguiente">
+                &#10095;
+            </button>
+
+            <div class="container hero-content">
+                <span class="eyebrow">
+                    INKSTICKER · CREATIVIDAD SIN LÍMITES
+                </span>
+
+                <h1>
+                    Tu estilo.<br>
+                    <span>Tu identidad.</span>
+                </h1>
+
+                <p>
+                    Tatuajes temporales y stickers personalizados
+                    para expresar tu propia esencia.
+                </p>
+
+                <div class="button-group">
+                    <a class="button button-gold"
+                       th:href="@{/tienda}">
+                        Explorar la tienda
+                    </a>
+
+                    <a class="button button-outline"
+                       href="https://wa.me/50684743842?text=Hola%2C%20quiero%20consultar%20sobre%20un%20dise%C3%B1o."
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Hablar por WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-bottom container" aria-hidden="true">
+                <span>DISEÑO</span>
+                <span class="hero-line"></span>
+                <span>CREATIVIDAD</span>
+                <span class="hero-line"></span>
+                <span>PERSONALIDAD</span>
+            </div>
+
+            <div class="hero-dots"
+                 role="group"
+                 aria-label="Seleccionar imagen del banner">
+
+                <button class="hero-dot is-active"
+                        type="button"
+                        aria-label="Mostrar imagen 1"
+                        aria-pressed="true"></button>
+
+                <button class="hero-dot"
+                        type="button"
+                        aria-label="Mostrar imagen 2"
+                        aria-pressed="false"></button>
+
+                <button class="hero-dot"
+                        type="button"
+                        aria-label="Mostrar imagen 3"
+                        aria-pressed="false"></button>
+
+                <button class="hero-dot"
+                        type="button"
+                        aria-label="Mostrar imagen 4"
+                        aria-pressed="false"></button>
+            </div>
+
+        </section>
+
+        <!-- 2. PRESENTACIÓN -->
+        <section class="intro light-section" id="presentacion">
+            <div class="container intro-grid">
+
+                <div class="intro-content">
+                    <span class="eyebrow eyebrow-dark">
+                        BIENVENIDO A INKSTICKER
+                    </span>
+
+                    <h2>
+                        Tatuajes y stickers
+                        <span>personalizados</span>
+                    </h2>
+
+                    <p>
+                        No solo vendemos productos personalizados, vendemos
+                        imagen, oportunidades y formas de expresar tu identidad.
+                        Convertimos tus ideas en diseños que reflejan tu estilo.
+                    </p>
+
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-check" aria-hidden="true">✓</span>
+                            <span>Testeado dermatológicamente*</span>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-check" aria-hidden="true">✓</span>
+                            <span>Nos adaptamos a tu estilo</span>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-check" aria-hidden="true">✓</span>
+                            <span>Más de tres años de trayectoria*</span>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <a class="button button-gold"
+                           href="https://wa.me/50684743842?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20dise%C3%B1os."
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Hablar por WhatsApp
+                        </a>
+
+                        <a class="button button-dark"
+                           th:href="@{/tienda}">
+                            Ver tienda
+                        </a>
+                    </div>
+
+                    <small class="demo-note">
+                        *Publicar estas afirmaciones únicamente cuando estén verificadas.
+                    </small>
+                </div>
+
+                <div class="intro-image image-frame">
+                    <img
+                        src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=1000&q=85"
+                        alt="Inspiración de arte corporal y tatuajes"
+                        loading="lazy">
+
+                    <div class="image-caption">
+                        <span>Tu idea, tu estilo</span>
+                        <small>CREATIVIDAD SIN LÍMITES</small>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. GALERÍA -->
+        <section class="gallery dark-section" id="galeria">
+            <div class="container">
+
+                <div class="section-heading heading-light">
+                    <span class="eyebrow">NUESTRA INSPIRACIÓN</span>
+                    <h2>Galería de <span>creaciones</span></h2>
+                    <p>
+                        Diseños pensados para destacar, expresar tu personalidad
+                        y acompañar tu estilo.
+                    </p>
+                </div>
+
+                <div class="product-grid">
+
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?auto=format&fit=crop&w=700&q=80"
+                                alt="Inspiración de tatuajes artísticos"
+                                loading="lazy">
+                            <span class="product-tag">Inspiración</span>
+                        </div>
+
+                        <div class="product-info">
+                            <h3>Arte corporal</h3>
+                            <p>Ideas para expresar tu personalidad.</p>
+                            <a th:href="@{/tienda}" class="text-link">
+                                Consultar diseños ↗
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=700&q=80"
+                                alt="Materiales artísticos y creatividad"
+                                loading="lazy">
+                            <span class="product-tag">Creatividad</span>
+                        </div>
+
+                        <div class="product-info">
+                            <h3>Diseños originales</h3>
+                            <p>Explora ideas y combinaciones únicas.</p>
+                            <a th:href="@{/tienda}" class="text-link">
+                                Consultar diseños ↗
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=700&q=80"
+                                alt="Ilustraciones y arte visual"
+                                loading="lazy">
+                            <span class="product-tag">Ilustración</span>
+                        </div>
+
+                        <div class="product-info">
+                            <h3>Ilustraciones</h3>
+                            <p>Referencias para encontrar tu estilo.</p>
+                            <a th:href="@{/tienda}" class="text-link">
+                                Consultar diseños ↗
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="product-card">
+                        <div class="product-image">
+                            <img
+                                src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=700&q=80"
+                                alt="Inspiración para stickers personalizados"
+                                loading="lazy">
+                            <span class="product-tag">Personalizable</span>
+                        </div>
+
+                        <div class="product-info">
+                            <h3>Stickers personalizados</h3>
+                            <p>Ideas para convertir en diseños propios.</p>
+                            <a th:href="@{/upload}" class="text-link">
+                                Crear mi idea ↗
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="custom-design" id="diseno">
+                    <div>
+                        <span class="eyebrow">HECHO A TU MANERA</span>
+                        <h3>¿Tienes tu propio diseño?</h3>
+                        <p>
+                            Comparte tus archivos, imágenes de referencia
+                            o una descripción de lo que tienes en mente.
+                        </p>
+                    </div>
+
+                    <a class="button button-gold" th:href="@{/upload}">
+                        Subir mi diseño
+                    </a>
+                </div>
+
+                <div class="center-action">
+                    <a class="button button-outline" th:href="@{/tienda}">
+                        Explorar toda la tienda
+                    </a>
+                </div>
+
+                <p class="demo-note">
+                    Imágenes ilustrativas provisionales. Los productos reales
+                    se incorporarán posteriormente.
+                </p>
+
+            </div>
+        </section>
+
+        <!-- 4. SOBRE NOSOTROS -->
+        <section class="about light-section" id="nosotros">
+            <div class="container about-grid">
+
+                <div>
+                    <span class="eyebrow eyebrow-dark">CONOZCÁMONOS</span>
+
+                    <h2>Una experiencia más cercana, artística y personalizada</h2>
+
+                    <p>
+                        InkSticker busca reunir creatividad, diseños
+                        personalizados y una atención que te acompañe desde
+                        la primera idea hasta la elección de tu producto.
+                    </p>
+
+                    <div class="about-pillar">
+                        <span class="pillar-number">01</span>
+                        <div>
+                            <h3>Descubre el catálogo</h3>
+                            <p>Encuentra inspiración en diferentes diseños y estilos.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-pillar">
+                        <span class="pillar-number">02</span>
+                        <div>
+                            <h3>Personaliza tu idea</h3>
+                            <p>Comparte referencias y explora alternativas para tu diseño.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-pillar">
+                        <span class="pillar-number">03</span>
+                        <div>
+                            <h3>Recibe asesoría</h3>
+                            <p>Conversa con nosotros para conocer los siguientes pasos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="values-card">
+                    <span class="eyebrow">NUESTRA ESENCIA</span>
+                    <h3>Lo que buscamos transmitir desde el primer contacto</h3>
+
+                    <ul>
+                        <li>✦ Creatividad en cada detalle</li>
+                        <li>✦ Comunicación clara y cercana</li>
+                        <li>✦ Atención a las ideas de cada cliente</li>
+                        <li>✦ Una experiencia sencilla y agradable</li>
+                    </ul>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- 5. CÓMO AGENDAR -->
+        <section class="booking dark-section" id="agendar">
+            <div class="container">
+
+                <div class="section-heading heading-light">
+                    <span class="eyebrow">EMPECEMOS CON TU IDEA</span>
+                    <h2>Un proceso simple, <span>paso a paso</span></h2>
+                    <p>Cuéntanos qué buscas y te orientaremos sobre cómo continuar.</p>
+                </div>
+
+                <div class="steps-grid">
+                    <article class="step-card">
+                        <span class="step-number">01</span>
+                        <h3>Escribe por WhatsApp</h3>
+                        <p>Inicia una conversación con nuestro equipo.</p>
+                    </article>
+
+                    <article class="step-card">
+                        <span class="step-number">02</span>
+                        <h3>Envía tu idea</h3>
+                        <p>Comparte referencias, imágenes o una descripción.</p>
+                    </article>
+
+                    <article class="step-card">
+                        <span class="step-number">03</span>
+                        <h3>Revisamos tu propuesta</h3>
+                        <p>Conversamos sobre las opciones disponibles.</p>
+                    </article>
+
+                    <article class="step-card">
+                        <span class="step-number">04</span>
+                        <h3>Coordinamos los detalles</h3>
+                        <p>Definimos contigo los siguientes pasos.</p>
+                    </article>
+                </div>
+
+                <div class="center-action">
+                    <a class="button button-gold"
+                       href="https://wa.me/50684743842"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Agendar valoración por WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 6. RESEÑAS -->
+        <section class="reviews light-section" id="resenas">
+            <div class="container">
+
+                <div class="section-heading heading-dark">
+                    <span class="eyebrow eyebrow-dark">EXPERIENCIAS</span>
+                    <h2>Reseñas de <span>clientes</span></h2>
+                    <p>Este espacio se actualizará con opiniones reales de clientes.</p>
+                </div>
+
+                <div class="reviews-grid">
+
+                    <div class="rating-panel">
+                        <span class="rating-label">VALORACIÓN DE CLIENTES</span>
+                        <strong class="rating-number">5.0</strong>
+                        <div class="stars" aria-label="Ejemplo visual de cinco estrellas">
+                            ★★★★★
+                        </div>
+                        <p>Calificación ilustrativa</p>
+                        <small>
+                            La puntuación y el número de opiniones deberán
+                            verificarse antes de publicar datos reales.
+                        </small>
+                    </div>
+
+                    <div class="review-cards">
+                        <article class="review-card">
+                            <span class="review-mark" aria-hidden="true">“</span>
+                            <h3>Atención cercana</h3>
+                            <p>
+                                Espacio reservado para una opinión real sobre
+                                la comunicación y la atención recibida.
+                            </p>
+                            <small>Opinión de ejemplo</small>
+                        </article>
+
+                        <article class="review-card">
+                            <span class="review-mark" aria-hidden="true">“</span>
+                            <h3>Proceso sencillo</h3>
+                            <p>
+                                Espacio para destacar una experiencia real
+                                durante la consulta o compra.
+                            </p>
+                            <small>Opinión de ejemplo</small>
+                        </article>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. PREGUNTAS FRECUENTES -->
+        <section class="faq dark-section" id="consultas">
+            <div class="container faq-grid">
+
+                <div class="section-heading heading-light faq-intro">
+                    <span class="eyebrow">¿TIENES DUDAS?</span>
+                    <h2>Respuestas rápidas para avanzar con seguridad</h2>
+                    <p>
+                        Aquí encontrarás información básica para comenzar.
+                        Si necesitas más detalles, puedes consultarnos.
+                    </p>
+
+                    <a class="button button-gold"
+                       href="https://wa.me/50684743842"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Hacer otra consulta
+                    </a>
+                </div>
+
+                <div class="faq-list">
+                    <details class="faq-item">
+                        <summary>¿Cómo puedo consultar por un diseño?</summary>
+                        <p>Escríbenos por WhatsApp y cuéntanos qué producto o diseño te interesa.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>¿Puedo enviar mis propias referencias?</summary>
+                        <p>Sí, puedes compartir imágenes de referencia para conversar sobre tu propuesta.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>¿Puedo solicitar un diseño personalizado?</summary>
+                        <p>Puedes enviarnos tu idea para consultar las opciones disponibles.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>¿Qué tipos de diseños puedo consultar?</summary>
+                        <p>Puedes preguntar por distintos estilos de tatuajes temporales y stickers personalizados.</p>
+                    </details>
+
+                    <details class="faq-item">
+                        <summary>¿Cómo puedo conocer los precios?</summary>
+                        <p>Contáctanos con los detalles de tu consulta para recibir información sobre las opciones disponibles.</p>
+                    </details>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 8. UBICACIÓN -->
+        <section class="location light-section" id="ubicacion">
+            <div class="container location-grid">
+
+                <div>
+                    <span class="eyebrow eyebrow-dark">VISÍTANOS</span>
+                    <h2>Encuéntranos en <span>San José</span></h2>
+
+                    <p>
+                        Esta sección está preparada para incorporar la dirección
+                        real del establecimiento cuando esté confirmada.
+                    </p>
+
+                    <div class="location-placeholder">
+                        <strong>Ubicación de demostración</strong>
+                        <span>San José, Costa Rica</span>
+                        <small>Dirección pendiente de confirmar</small>
+                    </div>
+
+                    <div class="button-group">
+                        <a class="button button-gold"
+                           href="https://www.google.com/maps/search/?api=1&query=San+Jose+Costa+Rica"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Abrir ubicación
+                        </a>
+
+                        <a class="button button-dark"
+                           href="https://www.google.com/maps/dir/?api=1&destination=San+Jose+Costa+Rica"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            Pedir indicaciones
+                        </a>
+                    </div>
+                </div>
+
+                <div class="map-frame">
+                    <iframe
+                        src="https://maps.google.com/maps?q=San%20Jos%C3%A9%2C%20Costa%20Rica&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        title="Mapa de demostración de San José, Costa Rica"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 9. CONTACTO FINAL -->
+        <section class="final-cta dark-section" id="contacto">
+            <div class="container final-cta-inner">
+                <span class="eyebrow">TU IDEA MERECE TOMAR FORMA</span>
+
+                <h2>¿Estás listo para hablar sobre tu próximo tatuaje?</h2>
+
+                <p>
+                    Escríbenos por WhatsApp y conversemos sobre tu idea.
+                </p>
+
+                <a class="button button-gold button-large"
+                   href="https://wa.me/50684743842?text=Hola%2C%20quiero%20hablar%20sobre%20mi%20pr%C3%B3ximo%20dise%C3%B1o."
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <span class="whatsapp-icon" aria-hidden="true">◉</span>
+                    Hablar ahora por WhatsApp
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="site-footer">
+        <div class="container footer-main">
+
+            <a class="brand footer-brand"
+               th:href="@{/}"
+               aria-label="InkSticker, volver al inicio">
+                <span class="brand-symbol">I</span>
+                <span>Ink<span class="brand-highlight">Sticker</span></span>
+            </a>
+
+            <p>Creatividad, ideas y diseños personalizados.</p>
+
+            <div class="footer-links">
+                <a th:href="@{/}">Inicio</a>
+                <a th:href="@{/tienda}">Tienda</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#ubicacion">Ubicación</a>
+                <a th:href="@{/}" title="Traducción próximamente">English</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <p>
+                    © 2026 InkSticker.
+                    <span> | </span>
+                    Contenido de demostración sujeto a actualización.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <a class="whatsapp-float"
+       href="https://wa.me/50684743842"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp"
+       title="Escríbenos por WhatsApp">
+        <span aria-hidden="true">◉</span>
+    </a>
+
+</body>
+</html>

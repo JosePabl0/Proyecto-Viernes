@@ -1,0 +1,561 @@
+/* =========================================
+   RESET GENERAL
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================
+   CUERPO GENERAL
+   ========================================= */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+
+    font-family: Arial, sans-serif;
+    background: #111111;
+    color: #f5f5f5;
+}
+
+
+/* =========================================
+   MI CUENTA
+   ========================================= */
+
+
+/* CONTENEDOR PRINCIPAL */
+
+.container {
+    width: 100%;
+    max-width: 850px;
+    padding: 55px 45px;
+
+    text-align: center;
+
+    background: #1b1b1b;
+    border: 1px solid #303030;
+    border-radius: 22px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* LOGO */
+
+.logo {
+    margin-bottom: 25px;
+
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+
+    color: #ffffff;
+}
+
+.logo span {
+    color: #d4a843;
+}
+
+
+/* TITULO */
+
+h1 {
+    margin-bottom: 15px;
+
+    font-size: 32px;
+    font-weight: 700;
+
+    color: #f5f5f5;
+}
+
+
+/* DESCRIPCION */
+
+.description {
+    max-width: 500px;
+    margin: 0 auto 40px;
+
+    color: #a5a5a5;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+
+/* OPCIONES DE CUENTA */
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+
+/* TARJETAS */
+
+.option {
+    padding: 35px 25px;
+
+    background: #242424;
+    border: 1px solid #373737;
+    border-radius: 16px;
+
+    transition: transform 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+
+/* EFECTO TARJETAS */
+
+.option:hover {
+    transform: translateY(-4px);
+
+    border-color: #8e7131;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+
+/* TITULOS TARJETAS */
+
+.option h2 {
+    margin-bottom: 15px;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    color: #f2f2f2;
+}
+
+
+/* TEXTOS TARJETAS */
+
+.option p {
+    min-height: 52px;
+    margin-bottom: 25px;
+
+    color: #a0a0a0;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* BOTON PRINCIPAL */
+
+.button {
+    display: block;
+    width: 100%;
+    padding: 14px 18px;
+
+    border: 1px solid #d4a843;
+    border-radius: 9px;
+
+    background: #d4a843;
+    color: #171717;
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: background 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.2s ease;
+}
+
+
+/* HOVER BOTON PRINCIPAL */
+
+.button:hover {
+    background: #e3bd68;
+    border-color: #e3bd68;
+
+    transform: translateY(-1px);
+}
+
+
+/* BOTON SECUNDARIO */
+
+.button.secondary {
+    background: transparent;
+    color: #d4a843;
+}
+
+
+/* HOVER BOTON SECUNDARIO */
+
+.button.secondary:hover {
+    background: rgba(212, 168, 67, 0.08);
+    border-color: #e3bd68;
+    color: #e3bd68;
+}
+
+
+/* ENLACE VOLVER */
+
+.back {
+    display: inline-block;
+    margin-top: 35px;
+
+    color: #a5a5a5;
+    text-decoration: none;
+    font-size: 14px;
+
+    transition: color 0.2s ease;
+}
+
+
+/* HOVER ENLACE VOLVER */
+
+.back:hover {
+    color: #d4a843;
+}
+
+
+/* =========================================
+   INICIAR SESION Y REGISTRO
+   ========================================= */
+
+
+/* CONTENEDOR DE AUTENTICACION */
+
+.auth-container {
+    width: 100%;
+    max-width: 460px;
+    padding: 42px 38px;
+
+    background: #1b1b1b;
+    border: 1px solid #303030;
+    border-radius: 20px;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* LOGO DE AUTENTICACION */
+
+.auth-container .logo {
+    margin-bottom: 22px;
+
+    text-align: center;
+
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+
+/* TITULO DE AUTENTICACION */
+
+.auth-container h1 {
+    margin-bottom: 12px;
+
+    text-align: center;
+
+    font-size: 27px;
+    font-weight: 700;
+
+    color: #f5f5f5;
+}
+
+
+/* SUBTITULO */
+
+.subtitle {
+    margin-bottom: 30px;
+
+    text-align: center;
+
+    color: #a5a5a5;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* GRUPOS DEL FORMULARIO */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+/* ETIQUETAS */
+
+.auth-container label {
+    display: block;
+    margin-bottom: 9px;
+
+    color: #e0e0e0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* CAMPOS DE TEXTO */
+
+.auth-container input {
+    width: 100%;
+    padding: 14px 15px;
+
+    background: #242424;
+    color: #f5f5f5;
+
+    border: 1px solid #3a3a3a;
+    border-radius: 9px;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
+    outline: none;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+}
+
+
+/* PLACEHOLDER */
+
+.auth-container input::placeholder {
+    color: #777777;
+}
+
+
+/* CAMPOS ENFOCADOS */
+
+.auth-container input:focus {
+    background: #292929;
+
+    border-color: #d4a843;
+
+    box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.12);
+}
+
+
+/* BOTON DE AUTENTICACION */
+
+.auth-container button {
+    width: 100%;
+    padding: 15px;
+
+    border: 1px solid #d4a843;
+    border-radius: 9px;
+
+    background: #d4a843;
+    color: #171717;
+
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+
+/* HOVER BOTON AUTENTICACION */
+
+.auth-container button:hover {
+    background: #e3bd68;
+    border-color: #e3bd68;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   MENSAJES DEL SISTEMA
+   ========================================= */
+
+
+/* MENSAJE GENERAL */
+
+.message {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+
+    border: 1px solid transparent;
+    border-radius: 9px;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* MENSAJE EXITOSO */
+
+.success {
+    background: rgba(67, 160, 91, 0.10);
+    border-color: rgba(67, 160, 91, 0.25);
+
+    color: #8bd49c;
+}
+
+
+/* MENSAJE DE ERROR */
+
+.error {
+    background: rgba(220, 70, 70, 0.10);
+    border-color: rgba(220, 70, 70, 0.25);
+
+    color: #f19b9b;
+}
+
+
+/* =========================================
+   VALIDACIONES DE LOS CAMPOS
+   ========================================= */
+
+
+/* MENSAJES DE VALIDACION THYMELEAF */
+
+.auth-container small {
+    display: block;
+    margin-top: 7px;
+
+    color: #f19b9b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   ENLACES DE AUTENTICACION
+   ========================================= */
+
+
+/* CONTENEDOR DE ENLACES */
+
+.links {
+    margin-top: 25px;
+
+    text-align: center;
+
+    color: #a5a5a5;
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+
+/* ENLACES */
+
+.auth-container a {
+    color: #d4a843;
+
+    text-decoration: none;
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+
+/* HOVER ENLACES */
+
+.auth-container a:hover {
+    color: #e3bd68;
+    text-decoration: underline;
+}
+
+
+/* VOLVER AL INICIO */
+
+.auth-container .back {
+    display: block;
+    margin-top: 23px;
+
+    text-align: center;
+
+    color: #a5a5a5;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+
+/* HOVER VOLVER AL INICIO */
+
+.auth-container .back:hover {
+    color: #d4a843;
+    text-decoration: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 20px 14px;
+    }
+
+
+    /* MI CUENTA */
+
+    .container {
+        padding: 38px 22px;
+        border-radius: 16px;
+    }
+
+    .container .logo {
+        font-size: 31px;
+    }
+
+    .container h1 {
+        font-size: 26px;
+    }
+
+    .description {
+        margin-bottom: 30px;
+        font-size: 14px;
+    }
+
+    .options {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .option {
+        padding: 28px 22px;
+    }
+
+    .option p {
+        min-height: auto;
+    }
+
+    .container .back {
+        margin-top: 28px;
+    }
+
+
+    /* AUTENTICACION */
+
+    .auth-container {
+        padding: 34px 23px;
+        border-radius: 16px;
+    }
+
+    .auth-container .logo {
+        font-size: 29px;
+    }
+
+    .auth-container h1 {
+        font-size: 24px;
+    }
+
+    .subtitle {
+        margin-bottom: 25px;
+        font-size: 13px;
+    }
+
+}
