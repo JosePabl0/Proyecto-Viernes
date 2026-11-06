@@ -52,25 +52,24 @@
                     <span>Ink<span class="brand-highlight">Sticker</span></span>
                 </a>
 
-                <div class="nav-links">
-                    <a th:href="@{/}">Inicio</a>
-                    <a th:href="@{/tienda}">Tienda</a>
-                    <a th:href="@{/upload}">Upload</a>
-                    <a href="#nosotros">Conozcámonos</a>
-                    <a th:href="@{/carrito}">Carrito</a>
-                    <a th:href="@{/cuenta}">Cuenta</a>
-                    <a href="#consultas">Consultas</a>
-                    <a th:href="@{/}" title="Traducción próximamente">English</a>
+<div class="nav-links">
+    <a th:href="@{/}">[[#{menu.inicio}]]</a>
+    <a th:href="@{/tienda}">[[#{menu.tienda}]]</a>
+    <a th:href="@{/upload}">[[#{menu.upload}]]</a>
+    <a href="#nosotros">[[#{menu.nosotros}]]</a>
+    <a th:href="@{/carrito}">[[#{menu.carrito}]]</a>
+    <a th:href="@{/cuenta}">[[#{menu.cuenta}]]</a>
+    <a href="#consultas">[[#{menu.consultas}]]</a>
+    <a th:href="@{/(lang=es)}">Español</a>
+    <a th:href="@{/(lang=en)}">English</a>
 
-                    <a class="button button-gold nav-cta"
-                       href="https://wa.me/50684743842"
-                       target="_blank"
-                       rel="noopener noreferrer">
-                        Cotizar por WhatsApp
-                    </a>
-                </div>
-
-            </div>
+    <a class="button button-gold nav-cta"
+       href="https://wa.me/50684743842"
+       target="_blank"
+       rel="noopener noreferrer">
+        [[#{menu.cotizar}]]
+    </a>
+</div>
         </nav>
     </header>
 
