@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración y Perfil | InkSticker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body class="admin-body">
+
+<div th:replace="~{fragments/admin-topbar :: topbar(${adminActual != null ? adminActual.nombre : 'Admin'}, null)}"></div>
+
+<div class="admin-wrapper">
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('configuracion')}"></div>
+
+    <main class="admin-main">
+        <div class="mb-4">
+            <h1 class="h3 fw-bold mb-1">Configuración del Administrador</h1>
+            <p class="text-muted mb-0 small">Datos personales de la cuenta administradora activa en el sistema.</p>
+        </div>
+
+        <div th:if="${exitoMsg}" class="alert alert-success" th:text="${exitoMsg}"></div>
+
+        <div class="row g-4" th:if="${adminActual != null}">
+            <!-- Tarjeta de resumen del perfil -->
+            <div class="col-12 col-lg-4">
+                <div class="ink-dark-card p-4 text-center h-100">
+                    <i class="bi bi-person-circle text-warning" style="font-size: 4rem;"></i>
+                    <h2 class="h5 fw-bold mt-3 mb-1" th:text="${adminActual.nombre}">Administrador</h2>
+                    <p class="text-secondary small mb-2" th:text="${adminActual.correo}">correo@ejemplo.com</p>
+                    <span class="badge bg-warning text-dark fw-semibold" th:text="${adminActual.rol}">ADMIN</span>
+
+                    <hr class="border-secondary border-opacity-25 my-4">
+
+                    <div class="text-start small d-flex flex-column gap-2">
+                        <div><span class="text-secondary">Teléfono:</span> <span th:text="${adminActual.telefono != null ? adminActual.telefono : 'No registrado'}">-</span></div>
+                        <div><span class="text-secondary">Provincia:</span> <span th:text="${adminActual.provincia != null ? adminActual.provincia : 'No registrada'}">-</span></div>
+                        <div><span class="text-secondary">Cantón:</span> <span th:text="${adminActual.canton != null ? adminActual.canton : 'No registrado'}">-</span></div>
+                        <div><span class="text-secondary">Distrito:</span> <span th:text="${adminActual.distrito != null ? adminActual.distrito : 'No registrado'}">-</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario para editar datos personales -->
+            <div class="col-12 col-lg-8">
+                <div class="ink-dark-card p-4 h-100">
+                    <h2 class="h6 fw-semibold mb-3">Editar datos personales</h2>
+
+                    <form th:action="@{/admin/configuracion/perfil}" method="post" class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label small text-secondary">Nombre completo</label>
+                            <input type="text" name="nombre" class="form-control bg-dark text-light border-secondary"
+                                   th:value="${adminActual.nombre}" required>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label class="form-label small text-secondary">Correo electrónico</label>
+                            <input type="email" class="form-control bg-dark text-secondary border-secondary"
+                                   th:value="${adminActual.correo}" readonly>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label class="form-label small text-secondary">Teléfono</label>
+                            <input type="text" name="telefono" class="form-control bg-dark text-light border-secondary"
+                                   th:value="${adminActual.telefono}">
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label class="form-label small text-secondary">Provincia</label>
+                            <input type="text" name="provincia" class="form-control bg-dark text-light border-secondary"
+                                   th:value="${adminActual.provincia}">
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label class="form-label small text-secondary">Cantón</label>
+                            <input type="text" name="canton" class="form-control bg-dark text-light border-secondary"
+                                   th:value="${adminActual.canton}">
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label class="form-label small text-secondary">Distrito</label>
+                            <input type="text" name="distrito" class="form-control bg-dark text-light border-secondary"
+                                   th:value="${adminActual.distrito}">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label small text-secondary">Dirección</label>
+                            <input type="text" name="direccion" class="form-control bg-dark text-light border-secondary"
+                                   th:value="${adminActual.direccion}">
+                        </div>
+
+                        <div class="col-12 pt-2 d-flex justify-content-between align-items-center">
+                            <a th:href="@{/admin/estudio}" class="btn btn-outline-warning btn-sm">
+                                <i class="bi bi-shop me-1"></i> Configuración del estudio
+                            </a>
+                            <button type="submit" class="btn btn-ink-gold">
+                                <i class="bi bi-check-lg me-1"></i> Guardar cambios
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div th:replace="~{fragments/admin-footer :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

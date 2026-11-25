@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes | InkSticker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body class="admin-body">
+
+<div th:replace="~{fragments/admin-topbar :: topbar(${adminActual != null ? adminActual.nombre : 'Admin'}, null)}"></div>
+
+<div class="admin-wrapper">
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('reportes')}"></div>
+
+    <main class="admin-main">
+        <div class="mb-4">
+            <h1 class="h3 fw-bold mb-1">Reportes del Sistema</h1>
+            <p class="text-muted mb-0 small">Resumen estadístico actual de las entidades registradas en MySQL.</p>
+        </div>
+
+        <div class="row g-3 mb-4">
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="ink-dark-card p-3">
+                    <div class="text-secondary small mb-1">Usuarios registrados</div>
+                    <div class="fs-2 fw-bold text-warning" th:text="${totalUsuarios != null ? totalUsuarios : 0}">0</div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="ink-dark-card p-3">
+                    <div class="text-secondary small mb-1">Productos en catálogo</div>
+                    <div class="fs-2 fw-bold text-success" th:text="${totalProductos != null ? totalProductos : 0}">0</div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="ink-dark-card p-3">
+                    <div class="text-secondary small mb-1">Categorías registradas</div>
+                    <div class="fs-2 fw-bold text-info" th:text="${totalCategorias != null ? totalCategorias : 0}">0</div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="ink-dark-card p-3">
+                    <div class="text-secondary small mb-1">Banners registrados</div>
+                    <div class="fs-2 fw-bold" th:text="${totalBanners != null ? totalBanners : 0}">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ink-dark-card p-4">
+            <h2 class="h6 fw-semibold mb-3">Comparativa de registros en base de datos</h2>
+            <canvas id="reportesChart" height="120"></canvas>
+        </div>
+    </main>
+</div>
+
+<div th:replace="~{fragments/admin-footer :: footer}"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script th:inline="javascript">
+    const uCount = /*[[${totalUsuarios != null ? totalUsuarios : 0}]]*/ 0;
+    const pCount = /*[[${totalProductos != null ? totalProductos : 0}]]*/ 0;
+    const cCount = /*[[${totalCategorias != null ? totalCategorias : 0}]]*/ 0;
+    const bCount = /*[[${totalBanners != null ? totalBanners : 0}]]*/ 0;
+
+    const rCtx = document.getElementById('reportesChart');
+    if (rCtx) {
+        new Chart(rCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Usuarios', 'Productos', 'Categorías', 'Banners'],
+                datasets: [{
+                    data: [uCount, pCount, cCount, bCount],
+                    backgroundColor: ['#f5b727', '#34d399', '#38bdf8', '#a78bfa'],
+                    borderColor: '#071923',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { labels: { color: '#e2e8f0' } }
+                }
+            }
+        });
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

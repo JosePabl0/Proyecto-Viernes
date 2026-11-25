@@ -1,0 +1,156 @@
+:root {
+    --ink-sidebar-bg: #18191b;
+    --ink-topbar-bg: #1e2022;
+    --ink-content-bg: #f4f5f7;
+    --ink-card-bg: #071923;
+    --ink-card-border: #122d3d;
+    --ink-accent: #f5b727;
+    --ink-accent-hover: #e0a419;
+    --ink-text-muted: #94a3b8;
+}
+
+body.admin-body {
+    background-color: var(--ink-content-bg);
+    color: #111827;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-wrapper {
+    display: flex;
+    flex: 1;
+    min-height: calc(100vh - 56px);
+}
+
+/* Barra lateral */
+.admin-sidebar {
+    width: 240px;
+    min-width: 240px;
+    background-color: var(--ink-sidebar-bg);
+    color: #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0.75rem;
+}
+
+.admin-logo-box {
+    background-color: #ffffff;
+    border-radius: 6px;
+    padding: 0.45rem 0.75rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #111827;
+}
+
+.admin-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: 6px;
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 0.92rem;
+    margin-bottom: 0.25rem;
+    transition: all 0.15s ease;
+}
+
+.admin-nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+    color: #ffffff;
+}
+
+.admin-nav-link.active {
+    background-color: var(--ink-accent);
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Barra superior */
+.admin-topbar {
+    background-color: var(--ink-topbar-bg);
+    padding: 0.65rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid #2b2e33;
+}
+
+.admin-search-input {
+    background-color: #0b1922 !important;
+    border: 1px solid #243b4a !important;
+    color: #f8fafc !important;
+    max-width: 340px;
+}
+
+.admin-search-input::placeholder {
+    color: #64748b;
+}
+
+/* Área principal */
+.admin-main {
+    flex: 1;
+    padding: 1.75rem 2rem;
+}
+
+/* Tarjetas oscuras estilo panel */
+.ink-dark-card {
+    background-color: var(--ink-card-bg);
+    border: 1px solid var(--ink-card-border);
+    border-radius: 10px;
+    color: #f8fafc;
+}
+
+.ink-icon-box {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background-color: rgba(245, 183, 39, 0.14);
+    color: var(--ink-accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.btn-ink-gold {
+    background-color: var(--ink-accent);
+    border-color: var(--ink-accent);
+    color: #111827;
+    font-weight: 600;
+}
+
+.btn-ink-gold:hover {
+    background-color: var(--ink-accent-hover);
+    border-color: var(--ink-accent-hover);
+    color: #111827;
+}
+
+.table-ink-dark {
+    --bs-table-bg: var(--ink-card-bg);
+    --bs-table-color: #e2e8f0;
+    --bs-table-border-color: #132c3b;
+    --bs-table-hover-bg: #0c2433;
+    --bs-table-hover-color: #ffffff;
+}
+
+.admin-footer {
+    background-color: #4b4d52;
+    color: #e5e7eb;
+    font-size: 0.82rem;
+    padding: 0.75rem 2rem;
+}
+
+@media (max-width: 991.98px) {
+    .admin-wrapper {
+        flex-direction: column;
+    }
+    .admin-sidebar {
+        width: 100%;
+        min-width: 100%;
+    }
+}

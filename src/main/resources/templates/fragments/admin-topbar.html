@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<header th:fragment="topbar(adminNombre, avisos)" class="admin-topbar">
+    <form th:action="@{/admin/catalogo}" method="get" class="input-group admin-search-input">
+        <span class="input-group-text bg-transparent border-0 text-secondary">
+            <i class="bi bi-search"></i>
+        </span>
+        <input type="text"
+               name="buscar"
+               class="form-control bg-transparent border-0 text-light admin-search-input"
+               placeholder="Buscar producto en catálogo...">
+    </form>
+
+    <div class="d-flex align-items-center gap-3 text-light">
+        <div class="dropdown">
+            <button type="button"
+                    class="btn btn-link text-light p-0 position-relative text-decoration-none"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    title="Avisos del sistema">
+                <i class="bi bi-bell fs-5"></i>
+                <span th:if="${avisos != null and !#lists.isEmpty(avisos)}"
+                      class="position-absolute top-0 start-100 translate-middle p-1 bg-warning rounded-circle"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow" style="min-width: 280px;">
+                <li class="dropdown-header fw-semibold">Estado del sistema</li>
+                <li th:if="${avisos == null or #lists.isEmpty(avisos)}">
+                    <span class="dropdown-item-text small text-muted">Sin avisos pendientes.</span>
+                </li>
+                <li th:each="aviso : ${avisos}">
+                    <span class="dropdown-item-text small" th:text="${aviso}">Aviso</span>
+                </li>
+            </ul>
+        </div>
+
+        <a th:href="@{/admin/configuracion}" class="d-flex align-items-center gap-2 text-decoration-none text-light">
+            <i class="bi bi-person-circle fs-4 text-secondary"></i>
+            <div class="lh-1">
+                <div class="fw-semibold small" th:text="${adminNombre != null ? adminNombre : 'Admin'}">Admin</div>
+                <div class="text-secondary" style="font-size: 0.72rem;">Administrador</div>
+            </div>
+        </a>
+    </div>
+</header>
+</body>
+</html>

@@ -7,11 +7,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 public class SecurityConfig {
@@ -30,11 +32,17 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return correo -> usuarioRepository.findByCorreoIgnoreCase(correo)
-                .map(usuario -> org.springframework.security.core.userdetails.User
-                        .withUsername(usuario.getCorreo())
-                        .password(usuario.getContrasena())
-                        .roles("USER")
-                        .build())
+                .map(usuario -> {
+                    String rolLimpio = (usuario.getRol() == null || usuario.getRol().isBlank())
+                            ? "USER"
+                            : usuario.getRol().trim().toUpperCase().replace("ROLE_", "");
+
+                    return org.springframework.security.core.userdetails.User
+                            .withUsername(usuario.getCorreo())
+                            .password(usuario.getContrasena())
+                            .roles(rolLimpio)
+                            .build();
+                })
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "No existe una cuenta con ese correo."));
     }
@@ -58,9 +66,29 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationSuccessHandler roleBasedSuccessHandler() {
+        return (request, response, authentication) -> {
+            boolean esAdmin = false;
+            for (GrantedAuthority authority : authentication.getAuthorities()) {
+                if ("ROLE_ADMIN".equals(authority.getAuthority())) {
+                    esAdmin = true;
+                    break;
+                }
+            }
+
+            if (esAdmin) {
+                response.sendRedirect(request.getContextPath() + "/admin");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/");
+            }
+        };
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
-            DaoAuthenticationProvider authenticationProvider) throws Exception {
+            DaoAuthenticationProvider authenticationProvider,
+            AuthenticationSuccessHandler roleBasedSuccessHandler) throws Exception {
 
         http
             .authenticationProvider(authenticationProvider)
@@ -75,9 +103,12 @@ public class SecurityConfig {
                     "/images/**",
                     "/favicon.ico"
                 ).permitAll()
+                .requestMatchers("/admin", "/admin/**")
+                    .hasRole("ADMIN")
                 .requestMatchers(
                     "/perfil",
-                    "/perfil/**"
+                    "/perfil/**",
+                    "/pedido/**"
                 ).authenticated()
                 .anyRequest().permitAll()
             )
@@ -86,7 +117,7 @@ public class SecurityConfig {
                 .loginProcessingUrl("/login")
                 .usernameParameter("correo")
                 .passwordParameter("contrasena")
-                .defaultSuccessUrl("/", true)
+                .successHandler(roleBasedSuccessHandler)
                 .failureUrl("/login?error")
                 .permitAll()
             )

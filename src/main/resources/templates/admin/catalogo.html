@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Admin (HU-16) | InkSticker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary sticky-top">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand fw-bold text-info" th:href="@{/admin}">
+            <i class="bi bi-shield-lock-fill me-2"></i>InkSticker Admin
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="adminNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 small">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin}">
+                        <i class="bi bi-speedometer2 me-1"></i>Panel
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-info fw-semibold" th:href="@{/admin/catalogo}">
+                        <i class="bi bi-box-seam me-1"></i>Catálogo (HU-16)
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/estudio}">
+                        <i class="bi bi-shop me-1"></i>Estudio (HU-19)
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/banners}">
+                        <i class="bi bi-images me-1"></i>Banners (HU-20)
+                    </a>
+                </li>
+            </ul>
+            <a class="btn btn-sm btn-outline-info" th:href="@{/}">
+                <i class="bi bi-box-arrow-up-right me-1"></i>Ver tienda
+            </a>
+        </div>
+    </div>
+</nav>
+
+<main class="container-fluid px-4 py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 pb-2 border-bottom border-secondary">
+        <div>
+            <h1 class="h4 mb-0 fw-bold">Gestión de Catálogo · Productos y Categorías</h1>
+            <small class="text-secondary">HU-16 · Crear, editar, activar/desactivar y eliminar ítems del catálogo</small>
+        </div>
+        <a th:href="@{/admin/catalogo}" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-counterclockwise me-1"></i>Limpiar filtros / Nuevo
+        </a>
+    </div>
+
+    <div th:if="${exitoMsg}" class="alert alert-success alert-dismissible fade show py-2 small" role="alert">
+        <i class="bi bi-check-circle-fill me-1"></i>
+        <span th:text="${exitoMsg}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div th:if="${errorMsg}" class="alert alert-danger alert-dismissible fade show py-2 small" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-1"></i>
+        <span th:text="${errorMsg}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- SECCION PRODUCTOS -->
+    <div class="row g-4 mb-5">
+        <div class="col-lg-4">
+            <div class="card bg-black border-secondary">
+                <div class="card-header border-secondary fw-semibold small text-info">
+                    <i class="bi bi-plus-square me-1"></i>
+                    <span th:text="${productoForm.id != null} ? 'Editar Producto #' + ${productoForm.id} : 'Nuevo Producto'">Nuevo Producto</span>
+                </div>
+                <div class="card-body small">
+                    <form th:action="@{/admin/productos/guardar}" th:object="${productoForm}" method="post">
+                        <input type="hidden" th:field="*{id}"/>
+
+                        <div class="mb-2">
+                            <label class="form-label text-secondary">Nombre</label>
+                            <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary"
+                                   th:field="*{nombre}" required placeholder="Ej. Pack Stickers Cyberpunk">
+                        </div>
+
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
+                                <label class="form-label text-secondary">Precio</label>
+                                <input type="number" step="0.01" min="0"
+                                       class="form-control form-control-sm bg-dark text-light border-secondary"
+                                       th:field="*{precio}" required>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label text-secondary">Etiqueta</label>
+                                <input type="text"
+                                       class="form-control form-control-sm bg-dark text-light border-secondary"
+                                       th:field="*{etiqueta}" placeholder="Ej. Nuevo">
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
+                                <label class="form-label text-secondary">Material</label>
+                                <input type="text"
+                                       class="form-control form-control-sm bg-dark text-light border-secondary"
+                                       th:field="*{material}" placeholder="Ej. Vinilo mate">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label text-secondary">Medidas</label>
+                                <input type="text"
+                                       class="form-control form-control-sm bg-dark text-light border-secondary"
+                                       th:field="*{medidas}" placeholder="Ej. 8x8 cm">
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label text-secondary">Categoría</label>
+                            <select name="categoriaId" class="form-select form-select-sm bg-dark text-light border-secondary" required>
+                                <option value="">-- Selecciona --</option>
+                                <option th:each="cat : ${categorias}"
+                                        th:value="${cat.id}"
+                                        th:text="${cat.nombre}"
+                                        th:selected="${productoForm.categoria != null && productoForm.categoria.id == cat.id}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-2">
+                            <label class="form-label text-secondary">Ruta o URL de imagen</label>
+                            <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary"
+                                   th:field="*{imagen}" placeholder="/images/sticker1.png">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label text-secondary">Descripción</label>
+                            <textarea rows="2" class="form-control form-control-sm bg-dark text-light border-secondary"
+                                      th:field="*{descripcion}" placeholder="Detalles del diseño o acabado..."></textarea>
+                        </div>
+
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="prodActivo" th:field="*{activo}">
+                            <label class="form-check-label" for="prodActivo">Producto activo en tienda</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-sm btn-info text-dark fw-semibold w-100">
+                            <i class="bi bi-save me-1"></i>Guardar Producto
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card bg-black border-secondary">
+                <div class="card-header border-secondary">
+                    <form th:action="@{/admin/catalogo}" method="get" class="row g-2 align-items-center">
+                        <div class="col-md-5">
+                            <input type="text" name="buscar" th:value="${buscarFiltro}"
+                                   class="form-control form-control-sm bg-dark text-light border-secondary"
+                                   placeholder="Buscar producto por nombre...">
+                        </div>
+                        <div class="col-md-4">
+                            <select name="categoriaId" class="form-select form-select-sm bg-dark text-light border-secondary">
+                                <option value="">Todas las categorías</option>
+                                <option th:each="cat : ${categorias}"
+                                        th:value="${cat.id}"
+                                        th:text="${cat.nombre}"
+                                        th:selected="${categoriaFiltroId != null && categoriaFiltroId == cat.id}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex gap-1">
+                            <button type="submit" class="btn btn-sm btn-outline-info w-100">
+                                <i class="bi bi-search"></i> Filtrar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-sm align-middle mb-0 small">
+                        <thead class="table-secondary text-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>Medidas</th>
+                            <th>Estado</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(productos)}">
+                            <td colspan="7" class="text-center text-secondary py-4">
+                                No hay productos que coincidan con el filtro.
+                            </td>
+                        </tr>
+                        <tr th:each="prod : ${productos}">
+                            <td th:text="${prod.id}">1</td>
+                            <td class="fw-semibold" th:text="${prod.nombre}">Producto</td>
+                            <td th:text="${prod.categoria != null ? prod.categoria.nombre : '-'}">Categoría</td>
+                            <td th:text="${prod.precio}">0.00</td>
+                            <td th:text="${prod.medidas != null ? prod.medidas : '-'}">-</td>
+                            <td>
+                                <span th:if="${prod.activo}" class="badge bg-success">Activo</span>
+                                <span th:unless="${prod.activo}" class="badge bg-secondary">Inactivo</span>
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <a th:href="@{/admin/catalogo(editarProductoId=${prod.id})}"
+                                   class="btn btn-sm btn-outline-warning py-0 px-2" title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form th:action="@{/admin/productos/{id}/toggle(id=${prod.id})}" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-info py-0 px-2" title="Activar/Desactivar">
+                                        <i class="bi bi-power"></i>
+                                    </button>
+                                </form>
+                                <form th:action="@{/admin/productos/{id}/eliminar(id=${prod.id})}" method="post" class="d-inline"
+                                      onsubmit="return confirm('¿Eliminar este producto?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger py-0 px-2" title="Eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCION CATEGORIAS -->
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card bg-black border-secondary">
+                <div class="card-header border-secondary fw-semibold small text-info">
+                    <i class="bi bi-tag me-1"></i>
+                    <span th:text="${categoriaForm.id != null} ? 'Editar Categoría #' + ${categoriaForm.id} : 'Nueva Categoría'">Nueva Categoría</span>
+                </div>
+                <div class="card-body small">
+                    <form th:action="@{/admin/categorias/guardar}" th:object="${categoriaForm}" method="post">
+                        <input type="hidden" th:field="*{id}"/>
+                        <div class="mb-2">
+                            <label class="form-label text-secondary">Nombre de categoría</label>
+                            <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary"
+                                   th:field="*{nombre}" required placeholder="Ej. Vinilos">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-secondary">Descripción</label>
+                            <input type="text" class="form-control form-control-sm bg-dark text-light border-secondary"
+                                   th:field="*{descripcion}" placeholder="Breve descripción">
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="catActiva" th:field="*{activa}">
+                            <label class="form-check-label" for="catActiva">Categoría activa</label>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-info text-dark fw-semibold w-100">
+                            <i class="bi bi-save me-1"></i>Guardar Categoría
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card bg-black border-secondary">
+                <div class="card-header border-secondary fw-semibold small text-secondary">
+                    Categorías Registradas
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover table-sm align-middle mb-0 small">
+                        <thead class="table-secondary text-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cat : ${categorias}">
+                            <td th:text="${cat.id}">1</td>
+                            <td class="fw-semibold" th:text="${cat.nombre}">Categoría</td>
+                            <td th:text="${cat.descripcion}">-</td>
+                            <td>
+                                <span th:if="${cat.activa}" class="badge bg-success">Activa</span>
+                                <span th:unless="${cat.activa}" class="badge bg-secondary">Inactiva</span>
+                            </td>
+                            <td class="text-end text-nowrap">
+                                <a th:href="@{/admin/catalogo(editarCategoriaId=${cat.id})}"
+                                   class="btn btn-sm btn-outline-warning py-0 px-2" title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <form th:action="@{/admin/categorias/{id}/toggle(id=${cat.id})}" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-info py-0 px-2" title="Activar/Desactivar">
+                                        <i class="bi bi-power"></i>
+                                    </button>
+                                </form>
+                                <form th:action="@{/admin/categorias/{id}/eliminar(id=${cat.id})}" method="post" class="d-inline"
+                                      onsubmit="return confirm('¿Eliminar esta categoría?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger py-0 px-2" title="Eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

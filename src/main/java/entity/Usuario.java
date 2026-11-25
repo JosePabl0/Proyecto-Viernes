@@ -62,6 +62,10 @@ public class Usuario {
     @Column(length = 500)
     private String direccion;
 
+    @Size(max = 30)
+    @Column(nullable = false, length = 30)
+    private String rol = "USER";
+
     public Usuario() {
     }
 
@@ -141,5 +145,13 @@ public class Usuario {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

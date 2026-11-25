@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos | InkSticker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<body class="admin-body">
+
+<div th:replace="~{fragments/admin-topbar :: topbar(${adminActual != null ? adminActual.nombre : 'Admin'}, null)}"></div>
+
+<div class="admin-wrapper">
+    <div th:replace="~{fragments/admin-sidebar :: sidebar('productos')}"></div>
+
+    <main class="admin-main">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div>
+                <h1 class="h3 fw-bold mb-1">Gestión de Productos</h1>
+                <p class="text-muted mb-0 small">Catálogo de productos registrados en la base de datos.</p>
+            </div>
+            <a th:href="@{/admin/catalogo}" class="btn btn-ink-gold">
+                <i class="bi bi-plus-lg me-1"></i> Crear o editar en Catálogo
+            </a>
+        </div>
+
+        <div class="row g-3 mb-4" th:with="lista=${productos != null ? productos : #lists.emptyList()}">
+            <div class="col-12 col-md-4">
+                <div class="ink-dark-card p-3">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="ink-icon-box"><i class="bi bi-box-seam"></i></span>
+                        <span class="text-secondary small">Productos totales</span>
+                    </div>
+                    <div class="fs-2 fw-bold" th:text="${#lists.size(lista)}">0</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="ink-dark-card p-3">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="ink-icon-box"><i class="bi bi-check-circle"></i></span>
+                        <span class="text-secondary small">Productos activos</span>
+                    </div>
+                    <div class="fs-2 fw-bold text-success" th:text="${#lists.size(lista.?[activo])}">0</div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="ink-dark-card p-3">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <span class="ink-icon-box"><i class="bi bi-pause-circle"></i></span>
+                        <span class="text-secondary small">Productos inactivos</span>
+                    </div>
+                    <div class="fs-2 fw-bold text-warning" th:text="${#lists.size(lista.?[!activo])}">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ink-dark-card p-3 mb-4">
+            <div class="row g-2">
+                <div class="col-12 col-md-6">
+                    <input type="text"
+                           id="buscarProducto"
+                           class="form-control bg-dark text-light border-secondary"
+                           placeholder="Buscar producto por nombre...">
+                </div>
+                <div class="col-12 col-md-3">
+                    <select id="filtroCategoria" class="form-select bg-dark text-light border-secondary">
+                        <option value="">Todas las categorías</option>
+                        <option th:each="cat : ${categorias}"
+                                th:value="${cat.nombre}"
+                                th:text="${cat.nombre}">Categoría</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-3">
+                    <select id="filtroEstadoProd" class="form-select bg-dark text-light border-secondary">
+                        <option value="">Todos los estados</option>
+                        <option value="ACTIVO">Activo</option>
+                        <option value="INACTIVO">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="ink-dark-card p-4">
+            <div class="table-responsive">
+                <table id="tablaProductos" class="table table-ink-dark table-hover align-middle mb-0 small">
+                    <thead>
+                    <tr class="text-secondary">
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Material / Medidas</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${productos == null or #lists.isEmpty(productos)}">
+                        <td colspan="7" class="text-center text-secondary py-4">No hay productos registrados.</td>
+                    </tr>
+                    <tr th:each="prod : ${productos}"
+                        th:with="catNombre=${prod.categoria != null ? prod.categoria.nombre : ''}"
+                        th:attr="data-categoria=${catNombre}, data-estado=${prod.activo ? 'ACTIVO' : 'INACTIVO'}">
+                        <td class="text-secondary" th:text="${prod.id}">1</td>
+                        <td class="fw-semibold prod-nombre" th:text="${prod.nombre}">Producto</td>
+                        <td>
+                            <span class="badge bg-secondary bg-opacity-25 text-light"
+                                  th:text="${!#strings.isEmpty(catNombre) ? catNombre : 'Sin categoría'}">Categoría</span>
+                        </td>
+                        <td class="text-secondary">
+                            <span th:text="${prod.material != null ? prod.material : '-'}"></span>
+                            <span th:if="${prod.medidas != null and !#strings.isEmpty(prod.medidas)}"
+                                  th:text="${' · ' + prod.medidas}"></span>
+                        </td>
+                        <td th:text="${'₡' + #numbers.formatDecimal(prod.precio, 1, 'COMMA', 0, 'POINT')}">₡0</td>
+                        <td>
+                            <span th:if="${prod.activo}" class="badge bg-success bg-opacity-25 text-success">Activo</span>
+                            <span th:unless="${prod.activo}" class="badge bg-danger bg-opacity-25 text-danger">Inactivo</span>
+                        </td>
+                        <td class="text-end">
+                            <a th:href="@{/admin/catalogo(editarProductoId=${prod.id})}"
+                               class="btn btn-sm btn-outline-warning"
+                               title="Editar producto">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <form th:action="@{/admin/productos/{id}/toggle(id=${prod.id})}"
+                                  method="post"
+                                  class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-outline-light" title="Cambiar estado">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div th:replace="~{fragments/admin-footer :: footer}"></div>
+
+<script>
+    const inputProd = document.getElementById('buscarProducto');
+    const selectCat = document.getElementById('filtroCategoria');
+    const selectEst = document.getElementById('filtroEstadoProd');
+    const filasProd = document.querySelectorAll('#tablaProductos tbody tr[data-estado]');
+
+    function filtrarProductos() {
+        const q = (inputProd.value || '').toLowerCase().trim();
+        const cat = (selectCat.value || '').toLowerCase().trim();
+        const est = (selectEst.value || '').toUpperCase().trim();
+
+        filasProd.forEach(fila => {
+            const nombre = (fila.querySelector('.prod-nombre')?.textContent || '').toLowerCase();
+            const filaCat = (fila.getAttribute('data-categoria') || '').toLowerCase();
+            const filaEst = (fila.getAttribute('data-estado') || '').toUpperCase();
+
+            const okNombre = !q || nombre.includes(q);
+            const okCat = !cat || filaCat === cat;
+            const okEst = !est || filaEst === est;
+
+            fila.style.display = (okNombre && okCat && okEst) ? '' : 'none';
+        });
+    }
+
+    inputProd?.addEventListener('input', filtrarProductos);
+    selectCat?.addEventListener('change', filtrarProductos);
+    selectEst?.addEventListener('change', filtrarProductos);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
